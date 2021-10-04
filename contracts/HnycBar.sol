@@ -2,10 +2,10 @@ pragma solidity 0.6.12;
 
 import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
 
-import "./CakeToken.sol";
+import "./HoneycombToken.sol";
 
-// SyrupBar with Governance.
-contract SyrupBar is BEP20('SyrupBar Token', 'SYRUP') {
+// HnycBar with Governance.
+contract HnycBar is BEP20('HnycBar Token', 'HNYCB') {
     /// @notice Creates `_amount` token to `_to`. Must only be called by the owner (MasterChef).
     function mint(address _to, uint256 _amount) public onlyOwner {
         _mint(_to, _amount);
@@ -17,23 +17,23 @@ contract SyrupBar is BEP20('SyrupBar Token', 'SYRUP') {
         _moveDelegates(_delegates[_from], address(0), _amount);
     }
 
-    // The CAKE TOKEN!
-    CakeToken public cake;
+    // The HNYC TOKEN!
+    HoneycombToken public hnyc;
 
 
     constructor(
-        CakeToken _cake
+        HoneycombToken _hnyc
     ) public {
-        cake = _cake;
+        hnyc = _hnyc;
     }
 
-    // Safe cake transfer function, just in case if rounding error causes pool to not have enough CAKEs.
-    function safeCakeTransfer(address _to, uint256 _amount) public onlyOwner {
-        uint256 cakeBal = cake.balanceOf(address(this));
-        if (_amount > cakeBal) {
-            cake.transfer(_to, cakeBal);
+    // Safe hnyc transfer function, just in case if rounding error causes pool to not have enough HNYCs.
+    function safeHnycTransfer(address _to, uint256 _amount) public onlyOwner {
+        uint256 hnycBal = hnyc.balanceOf(address(this));
+        if (_amount > hnycBal) {
+            hnyc.transfer(_to, cakeBal);
         } else {
-            cake.transfer(_to, _amount);
+            hnyc.transfer(_to, _amount);
         }
     }
 
