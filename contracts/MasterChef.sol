@@ -225,7 +225,7 @@ contract MasterChef is Ownable {
         }
         uint256 multiplier = getMultiplier(pool.lastRewardBlock, block.number);
         uint256 hnycReward = multiplier.mul(hnycPerBlock).mul(pool.allocPoint).div(totalAllocPoint);
-        hnyc.mint(devaddr, hnycReward.div(10));
+        hnyc.mint(devaddr, hnycReward.div(20));
         hnyc.mint(address(syrup), hnycReward);
         pool.accHnycPerShare = pool.accHnycPerShare.add(hnycReward.mul(1e12).div(lpSupply));
         pool.lastRewardBlock = block.number;
